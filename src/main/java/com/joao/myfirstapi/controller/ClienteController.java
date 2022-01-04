@@ -1,7 +1,7 @@
 package com.joao.myfirstapi.controller;
 
 import com.joao.myfirstapi.model.Cliente;
-import com.joao.myfirstapi.repository.ClienteRepository;
+import com.joao.myfirstapi.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +13,27 @@ import java.util.List;
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> listar(){
-        return clienteRepository.findAll();
+    public List<Cliente> buscarTodos(){
+        return clienteService.buscarTodosClientes();
+    }
+
+    @GetMapping("/{id}")
+    public Cliente buscarPorId(@PathVariable("id") Long id){
+        return clienteService.buscarPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente cadastrar(@RequestBody Cliente cliente){
-        return clienteRepository.save(cliente);
+        return clienteService.cadastrar(cliente);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarPorId(@PathVariable("id") Long id){
+        clienteService.DeletarPorId(id);
     }
 }
 
