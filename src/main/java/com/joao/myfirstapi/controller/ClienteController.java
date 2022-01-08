@@ -1,5 +1,6 @@
 package com.joao.myfirstapi.controller;
 
+import com.joao.myfirstapi.handlerException.RestResponseEntityExceptionHandler;
 import com.joao.myfirstapi.model.Cliente;
 import com.joao.myfirstapi.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
